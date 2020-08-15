@@ -1,0 +1,28 @@
+* {
+  /*     여백으로 인해 사이즈가 변경되는 것 방지*/
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+}
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: #555;
+}

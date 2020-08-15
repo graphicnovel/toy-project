@@ -1,0 +1,60 @@
+@import url("common.css");
+
+body {
+  padding: 50px;
+}
+
+.container {
+  width: 350px;
+  padding: 10px 20px 30px 20px;
+  text-align: center;
+  border: 5px solid #6124bf;
+  background: #d6c4f2;
+  margin: 0 auto;
+}
+.container h2 {
+  text-align: center;
+  margin: 20px 0;
+}
+.search {
+  width: 100%;
+}
+.search input[name="srch"] {
+  width: 70%;
+}
+.search button {
+}
+.list {
+  margin: 20px 0;
+  display: none;
+}
+.list.active {
+  display: block;
+}
+.list ul {
+  width: 100%;
+}
+.list ul li {
+  width: 100%;
+  padding: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.list ul li article {
+  display: none;
+}
+.list ul li article.active{
+    display: block;
+}
+.list ul li h5 {
+  margin: 10px 0;
+cursor:pointer;
+}
+.list ul li article figure {
+  width: 90%;
+  margin: 0 auto;
+}
+.list ul li article figure img {
+  width: 100%;
+}
+.list ul li article figcaption {
+}
