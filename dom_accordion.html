@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ACCORDION MENU</title>
+</head>
+
+
+<body>
+    <style>
+        body {
+            background: #e2e2e2;
+        }
+
+        .wrapper {
+            width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .accordion {
+            width: 100%;
+            padding: 0;
+        }
+
+        .item {
+            width: 90%;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            border-bottom: 1px solid #000;
+
+        }
+
+        .accTitle {
+            position: relative;
+            height: 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accIcon {
+            width: 30px;
+            height: 30px;
+
+            float: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .accIcon.active:before,
+        .accIcon.active:after {
+            background: #000;
+        }
+
+        .accIcon.active:before {
+            transform: rotate(90deg);
+        }
+
+        .accIcon:before,
+        .accIcon:after {
+            content: '';
+            position: absolute;
+            background: #c9d6df;
+
+            transition: .5s;
+
+        }
+
+        .accTitle:hover .accIcon:before,
+        .accTitle:hover .accIcon:after {
+            background: #000;
+        }
+
+        .accIcon:before {
+            width: 2px;
+            height: 20px;
+        }
+
+        .accIcon:after {
+            width: 20px;
+            height: 2px;
+        }
+
+        .text {
+            opacity: 0;
+            height: 0;
+            padding: 0px 10px;
+            width: 95%;
+            background: #e2e2e2;
+
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: opacity 0.8s cubic-bezier(.42, .2, .08, 1);
+        }
+
+        .text.active {
+
+            opacity: 1;
+            padding: 25px 10px;
+            height: auto;
+            position: relative;
+            z-index: 0;
+        }
+
+    </style>
+    <h1>아코디언 메뉴 만들기</h1>
+
+    <section class="wrapper">
+        <div class="container">
+            <ul class="accordion">
+                <li class="item">
+                    <h2 class="accTitle">item1 <span class="accIcon"></span></h2>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, repudiandae? Temporibus, id expedita molestiae maxime ipsum illum alias ad consectetur eligendi, vel placeat, odio itaque laboriosam totam ullam deserunt maiores.
+                    </div>
+                </li>
+                <li class="item">
+                    <h2 class="accTitle">item2 <span class="accIcon"></span></h2>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, repudiandae? Temporibus, id expedita molestiae maxime ipsum illum alias ad consectetur eligendi, vel placeat, odio itaque laboriosam totam ullam deserunt maiores.
+                    </div>
+                </li>
+                <li class="item">
+                    <h2 class="accTitle">item3 <span class="accIcon"></span></h2>
+                    <div class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, repudiandae? Temporibus, id expedita molestiae maxime ipsum illum alias ad consectetur eligendi, vel placeat, odio itaque laboriosam totam ullam deserunt maiores.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+
+            var accTitle = document.querySelectorAll('.accTitle');
+            var text = document.querySelectorAll('.item .text');
+            var accIcon = document.querySelectorAll('.accTitle .accIcon')
+
+            accTitle.forEach(function(el, idx) {
+                el.addEventListener('click', accFun)
+            });
+
+            function accFun(el) {
+                var targetText = el.currentTarget.nextElementSibling.classList;
+                var targetIcon = el.currentTarget.childNodes[1].classList;
+
+                console.log(targetIcon);
+
+                if (targetText.contains('active')) { //targetText에 active가 있으면
+                    targetText.remove('active');
+                    targetIcon.remove('active');
+                } else {
+                    text.forEach(function(el) {
+                        el.classList.remove('active');
+                    });
+                    accIcon.forEach(function(el) {
+                        el.classList.remove('active');
+                    });
+
+                    targetText.add('active');
+                    targetIcon.add('active');
+                }
+
+            }
+
+
+            //1.accTitle 클릭
+            //2.모든 text 클래스에서 active 삭제
+            //3.클릭한 text 클래스에 active 추가
+        });
+
+    </script>
+</body>
+
+</html>
