@@ -1,6 +1,8 @@
 @import url("common.css");
 
 body {
+    background:url('img/bg_sh.jpg');
+    background-size:cover;
   padding: 50px;
 }
 
