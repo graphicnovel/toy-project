@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draggable ex</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+  <body>
+    <style>
+      .container {
+        width: 800px;
+        margin: 30px auto 0 auto;
+      }
+      .mainImg {
+        width: 100%;
+        height: 700px;
+        border: 1px solid #aaa;
+
+        text-align: center;
+
+        position: relative;
+
+        overflow: hidden;
+      }
+      .mainImg.active {
+        border: 3px dashed rgb(17, 17, 129);
+        background: rgba(238, 238, 238, 0.555);
+      }
+      .mainImg.active p {
+        color: #aaa;
+      }
+      .mainImg p.drop {
+        display: none;
+      }
+      .mainImg p {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+      }
+      .mainImg img {
+        width: 100%;
+        height: auto;
+      }
+      ul {
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0;
+      }
+      ul li {
+        width: 150px;
+        height: 150px;
+        border: 1px solid #aaa;
+        overflow: hidden;
+      }
+      ul li img.active {
+        display: none;
+      }
+      ul li img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+    <div class="container">
+      <div class="mainImg">
+        <p>이곳에 사진을 드래그 해보세요.</p>
+      </div>
+      <ul>
+        <li><img src="img/sh (1).jpg" data-num="0" draggable="true" /></li>
+        <li><img src="img/sh (2).jpg" data-num="1" draggable="true" /></li>
+        <li><img src="img/sh (3).jpg" data-num="2" draggable="true" /></li>
+        <li><img src="img/sh (4).jpg" data-num="3" draggable="true" /></li>
+        <li><img src="img/sh (5).jpg" data-num="4" draggable="true" /></li>
+      </ul>
+    </div>
+    <script>
+      $(function () {
+        //start
+        var mainImg = document.querySelector(".mainImg");
+        var mainP = document.querySelector(".mainImg p");
+        var li = document.querySelectorAll("ul li");
+        var thumb = document.querySelectorAll("ul li img");
+        var imgIdx;
+
+        thumb.forEach(function (el) {
+          el.addEventListener("dragstart", function (e) {
+            imgIdx = this.dataset.num;
+            console.log(imgIdx);
+            setTimeout(function () {
+              el.classList.add("active");
+            }, 10);
+          });
+        });
+
+        thumb.forEach(function (el) {
+          el.addEventListener("dragend", function () {
+            el.classList.remove("active");
+          });
+        });
+
+        mainImg.addEventListener("dragover", dragOver);
+        mainImg.addEventListener("dragenter", dragEnter);
+        mainImg.addEventListener("dragleave", dragLeave);
+        mainImg.addEventListener("drop", dragDrop);
+
+        function dragOver(e) {
+          console.log(e.type);
+          e.preventDefault();
+        }
+        function dragEnter(e) {
+          console.log(e.type);
+          e.preventDefault();
+
+          mainImg.classList.add("active");
+        }
+        function dragLeave(e) {
+          mainImg.classList.remove("active");
+        }
+        function dragDrop(e) {
+          var copy = thumb[imgIdx].cloneNode();
+
+          var existImg = document.querySelector(".mainImg img");
+          console.log(existImg);
+
+          if (existImg != null) {
+            mainImg.removeChild(existImg);
+          }
+
+          mainImg.append(copy);
+          mainImg.classList.remove("active");
+          mainP.classList.add("drop");
+        }
+
+        //end
+      });
+    </script>
+  </body>
+</html>
