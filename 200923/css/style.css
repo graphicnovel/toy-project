@@ -46,6 +46,9 @@ header {
 
   margin: 0 60px;
 }
+.h_wrap .logo a {
+  text-decoration: none;
+}
 .h_wrap h2 {
   color: #000;
 }
